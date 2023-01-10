@@ -1,2 +1,4 @@
 openai
 slack_bolt
+gunicorn
+flask
