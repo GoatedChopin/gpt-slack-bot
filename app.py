@@ -21,7 +21,7 @@ def ask_gpt(prompt) -> str:
         prompt=generate_prompt(prompt),
         temperature=0.6,
         )
-    return response.choices[0].text
+    return response
 
 
 @app.event("app_mention")
@@ -29,10 +29,8 @@ def handle_gpt_mention(body, say, logger):
     logger.info(body)
     print(body)
     response = ask_gpt(body["event"]["text"])
-    say("Placeholder1")
     logger.info(response)
-    say("Placeholder2")
-    say(str(response))
+    say(str(response.choices[0].text))
 
 
 from flask import Flask, request
