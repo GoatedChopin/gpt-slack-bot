@@ -27,7 +27,7 @@ def ask_gpt(prompt) -> str:
 @app.event("app_mention")
 def handle_gpt_mention(body, say, logger):
     logger.info(body)
-    response = ask_gpt(body)
+    response = ask_gpt(body["elements"][1]["text"])
     say("Placeholder1")
     logger.info(response)
     say("Placeholder2")
