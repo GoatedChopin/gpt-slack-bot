@@ -28,6 +28,7 @@ def ask_gpt(prompt) -> str:
 def handle_gpt_mention(body, say, logger):
     logger.info(body)
     response = ask_gpt(body)
+    logger.info(response)
     say(response)
 
 
