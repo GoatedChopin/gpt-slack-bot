@@ -20,6 +20,7 @@ def ask_gpt(prompt) -> str:
         model="text-davinci-003",
         prompt=generate_prompt(prompt),
         temperature=0.6,
+        max_tokens=250,
         )
     return response
 
