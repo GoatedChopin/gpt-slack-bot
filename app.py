@@ -30,6 +30,7 @@ def handle_gpt_mention(body, say, logger):
     print(body)
     response = ask_gpt(body["event"]["text"])
     logger.info(response)
+    logger.info(response.choices)
     say(str(response.choices[0].text))
 
 
