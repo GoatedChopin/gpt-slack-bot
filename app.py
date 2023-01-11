@@ -1,14 +1,19 @@
 import os
-from slack_bolt import App
 import openai
+from slack_bolt import App
+from flask import Flask, request
+from slack_bolt.adapter.flask import SlackRequestHandler
+
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Initializes your app with your bot token and signing secret
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
     signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
 )
+
+flask_app = Flask(__name__)
+handler = SlackRequestHandler(app)
 
 
 def generate_prompt(prompt) -> str:
@@ -33,13 +38,6 @@ def handle_gpt_mention(body, say, logger):
     logger.info(response)
     print(response.choices)
     say(str(response.choices[0].text))
-
-
-from flask import Flask, request
-from slack_bolt.adapter.flask import SlackRequestHandler
-
-flask_app = Flask(__name__)
-handler = SlackRequestHandler(app)
 
 
 @flask_app.route("/slack/events", methods=["POST"])
